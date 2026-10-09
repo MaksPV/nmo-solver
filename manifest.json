@@ -1,0 +1,54 @@
+{
+  "manifest_version": 2,
+  "name": "НМО Автоответчик",
+  "version": "1.0",
+  "description": "Автоматически отвечает на тесты НМО на основе ответов с РосМедИнфо",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "*://*.rosmedicinfo.ru/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.rosmedicinfo.ru/*",
+        "*://rosmedicinfo.ru/*"
+      ],
+      "js": ["content_scripts/answers_page.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.quizlib.com/*",
+        "*://quizlib.com/*",
+        "*://*.nmo.ru/*",
+        "*://nmo.ru/*",
+        "*://*.rosminzdrav.ru/*",
+        "*://rosminzdrav.ru/*",
+        "*://*.iom-spo.edu.rosminzdrav.ru/*",
+        "*://iom-spo.edu.rosminzdrav.ru/*"
+      ],
+      "js": ["content_scripts/test_page.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "НМО Автоответчик",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
